@@ -1,5 +1,7 @@
 # GitHub API 测试项目
 
+中文 | [English](README.en.md)
+
 本项目是一个基于 BDD (行为驱动开发) 的 GitHub API 测试框架，使用 Cucumber.js 和 TypeScript 实现。
 
 ## 环境要求
