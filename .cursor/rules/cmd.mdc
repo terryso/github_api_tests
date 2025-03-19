@@ -1,0 +1,71 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# 命令规则说明
+
+## 测试相关命令
+
+### 基本测试命令
+- `/test` - 执行基本测试命令
+  - 执行: `npm test`
+  - 用途: 运行所有测试用例
+
+### 标签测试命令
+- `/test 标签名 [标签名...]` - 执行标签测试
+  - 单标签格式: `/test repos`
+    - 执行: `npm run test:verbose -- --tags '@repos'`
+  - 多标签格式: `/test login repos`
+    - 执行: `npm run test:verbose -- --tags '@login or @repos'`
+  - 用途: 运行带有指定标签的测试用例，多个标签之间是"或"的关系
+
+### 使用说明
+- 标签名称区分大小写
+- 多个标签之间使用空格分隔
+
+## 功能文件生成命令
+
+### 新增功能文件
+- `/add_feat -d API文档路径 [描述]` - 生成功能文件
+  - 格式: `/add_feat -d docs/repos.json 仓库查询接口`
+  - 用途: 在 src/features 目录下生成新的 feature 文件
+  - 说明: 
+    - 根据提供的 API 文档路径和描述生成基础的功能文件
+    - 生成前必须检查 src/features 目录下所有的feature，尽量使用可以共用的步骤
+    - 可以参考 [list_repos.feature](mdc:src/features/repos/list_repos.feature)
+    - 在 Feature 上方添加 API 文档相关注释：
+      ```gherkin
+      # API文档路径: docs/repos.json
+      Feature: 用户信息查询接口
+      ```
+    - 仅生成第一个基础场景（Scenario）
+    - 不生成对应的步骤定义文件
+    - API文档路径参数必填，描述信息可选
+  - 命令参数说明：
+    - `-d`: 指定 API 文档路径，必填参数
+    - 描述信息：可选参数，用于补充功能说明
+
+### 生成步骤定义
+- `/steps feature路径` - 生成步骤定义文件
+  - 格式: `/steps src/features/repos/list_repos.feature`
+  - 用途: 为指定的 feature 文件生成对应的步骤定义代码
+  - 说明:
+    - 在 src/steps 目录下生成对应的步骤定义文件
+    - 生成前会检查 src/steps 目录下现有的步骤定义
+    - 优先复用已有的步骤定义
+    - 仅为未定义的步骤生成新的定义代码
+    - 生成的文件名格式为：[功能模块].steps.ts
+    - 步骤定义参考 [list_repos.steps.ts](mdc:src/steps/repos/list_repos.steps.ts) 
+
+### 添加测试场景
+- `/add_scene feature路径` - 为指定feature添加新的测试场景
+  - 格式: `/add_scene src/features/user/login.feature`
+  - 用途: 为现有feature文件添加新的测试场景
+  - 说明:
+    - 添加前会根据API文档检查当前feature的场景覆盖情况
+    - 仅在现有场景未完全覆盖API功能时添加新场景
+    - 新场景应关注未覆盖的功能点或边界条件
+    - 遵循现有场景的编写风格和命名规范
+    - 确保新场景与已有场景不重复
+    - 一次只加一个场景

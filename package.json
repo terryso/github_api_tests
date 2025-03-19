@@ -1,0 +1,34 @@
+{
+  "name": "github_api_tests",
+  "version": "1.0.0",
+  "description": "GitHub REST API Integration Tests",
+  "main": "index.js",
+  "scripts": {
+    "test": "cucumber-js -p default",
+    "test:repos": "cucumber-js --tags @repos",
+    "test:report": "cucumber-js --format html:cucumber-report.html"
+  },
+  "keywords": [
+    "github",
+    "api",
+    "testing",
+    "cucumber",
+    "bdd"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@cucumber/cucumber": "^11.2.0",
+    "@cucumber/pretty-formatter": "^1.0.1",
+    "@types/chai": "^4.3.11",
+    "@types/node": "^20.11.19",
+    "chai": "^4.3.10",
+    "dotenv": "^16.4.4",
+    "pactum": "^3.5.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "https-proxy-agent": "^7.0.6"
+  }
+}
